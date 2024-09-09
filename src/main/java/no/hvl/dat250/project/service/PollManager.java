@@ -32,10 +32,10 @@ public class PollManager {
     }}, fredrik);
 
     public PollManager() {
-        polls.put("briller", glassespoll );
-        polls.put("sykkel", bikesPoll );
-        users.put("Fredrik",fredrik);
-        users.put("Andreas", andreas);
+        polls.put(glassespoll.getId(), glassespoll );
+        polls.put(bikesPoll.getId(), bikesPoll );
+        users.put(fredrik.getId(),fredrik);
+        users.put(andreas.getId(), andreas);
         andreas.addPoll(glassespoll);
         fredrik.addPoll(bikesPoll);
 
@@ -57,17 +57,17 @@ public class PollManager {
         this.users = users;
     }
     public User addUser(User user) {
-        users.put(user.getUsername(), user);
+        users.put(user.getId(), user);
         return user;
     }
     public Poll addPoll(Poll poll) {
-        polls.put(poll.getQuestions(), poll);
+        polls.put(poll.getId(), poll);
         return poll;
     }
-    public Poll getPoll(String questions) {
-        return polls.get(questions);
+    public Poll getPoll(String id) {
+        return polls.get(id);
     }
-    public User getUser(String username) {
-        return users.get(username);
+    public User getUser(String id) {
+        return users.get(id);
     }
 }

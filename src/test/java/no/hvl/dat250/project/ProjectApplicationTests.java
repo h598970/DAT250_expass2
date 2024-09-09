@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
@@ -16,7 +17,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 class ProjectApplicationTests {
 
 	@LocalServerPort
@@ -41,6 +42,7 @@ class ProjectApplicationTests {
 
 		var responseEntity = client.post()
 				.uri("/user")
+				.contentType(MediaType.APPLICATION_JSON)
 				.body(Mono.just(user1), User.class)
 				.retrieve()
 				.toBodilessEntity()
@@ -69,6 +71,7 @@ class ProjectApplicationTests {
 
 		client.post()
 				.uri("/user")
+				.contentType(MediaType.APPLICATION_JSON)
 				.body(Mono.just(user2), User.class)
 				.retrieve()
 				.toBodilessEntity()
@@ -105,6 +108,7 @@ class ProjectApplicationTests {
 
 			client.post()
 					.uri("/user")
+					.contentType(MediaType.APPLICATION_JSON)
 					.body(Mono.just(user1), User.class)
 					.retrieve()
 					.toBodilessEntity()
@@ -117,6 +121,7 @@ class ProjectApplicationTests {
 
 		client.post()
 				.uri("/poll")
+				.contentType(MediaType.APPLICATION_JSON)
 				.body(Mono.just(poll), Poll.class)
 				.retrieve()
 				.toBodilessEntity()
@@ -156,6 +161,7 @@ class ProjectApplicationTests {
 
 			client.post()
 					.uri("/user")
+					.contentType(MediaType.APPLICATION_JSON)
 					.body(Mono.just(user2), User.class)
 					.retrieve()
 					.toBodilessEntity()
@@ -165,9 +171,11 @@ class ProjectApplicationTests {
 
 		VoteOption voteOption0 = new VoteOption();
 		voteOption0.setCaption("YES");
+		voteOption0.setPresentationOrder(1);
 
 		VoteOption voteOption1 = new VoteOption();
 		voteOption1.setCaption("NO");
+		voteOption1.setPresentationOrder(2);
 		ArrayList<VoteOption> voteOptions = new ArrayList<>();
 		voteOptions.add(voteOption0);
 		voteOptions.add(voteOption1);
@@ -180,6 +188,7 @@ class ProjectApplicationTests {
 
 		client.post()
 				.uri("/poll")
+				.contentType(MediaType.APPLICATION_JSON)
 				.body(Mono.just(poll), Poll.class)
 				.retrieve()
 				.toBodilessEntity()
@@ -192,6 +201,7 @@ class ProjectApplicationTests {
 
 		client.post()
 				.uri("/vote")
+				.contentType(MediaType.APPLICATION_JSON)
 				.body(Mono.just(vote), Vote.class)
 				.retrieve()
 				.toBodilessEntity()
@@ -201,6 +211,7 @@ class ProjectApplicationTests {
 
 		client.post()
 				.uri("/vote")
+				.contentType(MediaType.APPLICATION_JSON)
 				.body(Mono.just(vote), Vote.class)
 				.retrieve()
 				.toBodilessEntity()
@@ -208,6 +219,7 @@ class ProjectApplicationTests {
 
 		List<Vote> votes = client.post()
 				.uri("/votes")
+				.contentType(MediaType.APPLICATION_JSON)
 				.body(Mono.just(user2), User.class)
 				.retrieve()
 				.bodyToFlux(Vote.class)
@@ -219,6 +231,7 @@ class ProjectApplicationTests {
 
 		client.post()
 				.uri("/DelPoll")
+				.contentType(MediaType.APPLICATION_JSON)
 				.body(Mono.just(poll), Poll.class)
 				.retrieve()
 				.toBodilessEntity()
@@ -226,6 +239,7 @@ class ProjectApplicationTests {
 
 		 votes = client.post()
 				.uri("/votes")
+				 .contentType(MediaType.APPLICATION_JSON)
 				.body(Mono.just(user2),User.class)
 				.retrieve()
 				.bodyToFlux(Vote.class)
