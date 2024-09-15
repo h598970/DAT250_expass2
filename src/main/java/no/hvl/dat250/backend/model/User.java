@@ -1,7 +1,5 @@
-package no.hvl.dat250.project.model;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+package no.hvl.dat250.backend.model;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import java.util.ArrayList;

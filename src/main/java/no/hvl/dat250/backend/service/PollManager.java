@@ -1,8 +1,8 @@
-package no.hvl.dat250.project.service;
+package no.hvl.dat250.backend.service;
 
-import no.hvl.dat250.project.model.Poll;
-import no.hvl.dat250.project.model.User;
-import no.hvl.dat250.project.model.VoteOption;
+import no.hvl.dat250.backend.model.Poll;
+import no.hvl.dat250.backend.model.User;
+import no.hvl.dat250.backend.model.VoteOption;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;

@@ -1,7 +1,6 @@
-package no.hvl.dat250.project.model;
+package no.hvl.dat250.backend.model;
 
 import com.fasterxml.jackson.annotation.*;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -11,7 +10,7 @@ import java.util.UUID;
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Poll {
     private String id;
-    private String questions;
+    private String question;
     private Instant publishedAt;
     private Instant validUntil;
     private List<VoteOption> options;
@@ -34,9 +33,9 @@ public class Poll {
         this.creator = new User();
     }
 
-    public Poll(String questions, Instant publishedAt, Instant validUntil, List<VoteOption> options, User creator) {
+    public Poll(String question, Instant publishedAt, Instant validUntil, List<VoteOption> options, User creator) {
         this.id = UUID.randomUUID().toString();
-        this.questions = questions;
+        this.question = question;
         this.publishedAt = publishedAt;
         this.validUntil = validUntil;
         this.options = options;
@@ -74,12 +73,12 @@ public class Poll {
         this.creator = creator;
     }
 
-    public String getQuestions() {
-        return questions;
+    public String getQuestion() {
+        return question;
     }
 
-    public void setQuestions(String questions) {
-        this.questions = questions;
+    public void setQuestion(String question) {
+        this.question = question;
     }
 
     public Instant getPublishedAt() {

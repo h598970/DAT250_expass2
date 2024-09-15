@@ -1,8 +1,6 @@
-package no.hvl.dat250.project.model;
+package no.hvl.dat250.backend.model;
 
 import com.fasterxml.jackson.annotation.*;
-import no.hvl.dat250.project.service.PollManager;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import java.time.Instant;
 import java.util.UUID;

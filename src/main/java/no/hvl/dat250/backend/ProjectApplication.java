@@ -1,4 +1,4 @@
-package no.hvl.dat250.project;
+package no.hvl.dat250.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

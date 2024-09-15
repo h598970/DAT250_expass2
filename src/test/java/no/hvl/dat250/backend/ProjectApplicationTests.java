@@ -1,9 +1,9 @@
-package no.hvl.dat250.project;
+package no.hvl.dat250.backend;
 
-import no.hvl.dat250.project.model.Poll;
-import no.hvl.dat250.project.model.User;
-import no.hvl.dat250.project.model.Vote;
-import no.hvl.dat250.project.model.VoteOption;
+import no.hvl.dat250.backend.model.Poll;
+import no.hvl.dat250.backend.model.User;
+import no.hvl.dat250.backend.model.Vote;
+import no.hvl.dat250.backend.model.VoteOption;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,6 +12,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -116,8 +118,11 @@ class ProjectApplicationTests {
 		} else user1 = users.stream().filter(u -> u.getUsername().equals("test1")).findFirst().orElse(null);
 
 		Poll poll = new Poll();
-		poll.setQuestions("Is HVL greater than UiB?");
+		poll.setQuestion("Is HVL greater than UiB?");
 		poll.setCreator(user1);
+		poll.setPublishedAt(Instant.now()); // Set a publish date
+		poll.setValidUntil(Instant.now().plus(2, ChronoUnit.DAYS));
+		poll.setOptions(List.of(new VoteOption("Yes", 1), new VoteOption("No", 2)));
 
 		client.post()
 				.uri("/poll")
@@ -135,7 +140,7 @@ class ProjectApplicationTests {
 				.block();
 
 		assertThat(polls).isNotEmpty();
-		assertThat(polls.stream().anyMatch(p -> p.getQuestions().equals("Is HVL greater than UiB?"))).isTrue();
+		assertThat(polls.stream().anyMatch(p -> p.getQuestion().equals("Is HVL greater than UiB?"))).isTrue();
 
 
 	}
@@ -182,7 +187,7 @@ class ProjectApplicationTests {
 
 
 		Poll poll = new Poll();
-		poll.setQuestions("Is Java better than Python?");
+		poll.setQuestion("Is Java better than Python?");
 		poll.setCreator(user2);
 		poll.setOptions(voteOptions);
 

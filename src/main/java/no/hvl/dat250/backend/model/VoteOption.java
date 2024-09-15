@@ -1,6 +1,4 @@
-package no.hvl.dat250.project.model;
-
-import java.time.Instant;
+package no.hvl.dat250.backend.model;
 
 public class VoteOption {
     private String caption;
